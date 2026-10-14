@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'IBM Plex Sans', 'Segoe UI', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --color-page: #f2f4f7;
+  --color-ink: #1b2432;
+  --color-muted: #5d6b7a;
+  --color-line: #d5dae1;
+  --color-navy: #14253f;
+  --color-accent: #1a5fb4;
+  --color-accent-soft: #e5eefb;
+  --color-ok: #1e6b3a;
+  --color-ok-bg: #e6f2ea;
+  --color-bad: #a52a22;
+  --color-bad-bg: #f9e8e6;
+  --color-warn: #85590a;
+  --color-warn-bg: #fbf1dc;
+}
+
+body {
+  @apply bg-page font-sans text-ink;
+}
+
+/* the few shapes that repeat on every page */
+@layer components {
+  .card {
+    @apply mb-5 border border-line bg-white p-5;
+  }
+  .label {
+    @apply mb-1 block text-sm font-semibold;
+  }
+  .input {
+    @apply w-full border border-line bg-white px-3 py-2.5 outline-none focus:border-accent;
+  }
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center border border-line bg-white px-4 py-2 font-medium hover:border-accent disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply border-accent bg-accent text-white hover:bg-[#164f96];
+  }
+  .btn-approve {
+    @apply border-ok text-ok;
+  }
+  .btn-reject {
+    @apply border-bad text-bad;
+  }
+  .btn-sm {
+    @apply px-3 py-1 text-sm;
+  }
+  .link {
+    @apply cursor-pointer text-accent underline;
+  }
+  .error-box {
+    @apply mb-4 border border-bad bg-bad-bg px-3 py-2 text-sm text-bad;
+  }
+}
+@layer components {
+  .data-table {
+    @apply w-full border-collapse;
+  }
+  .data-table th {
+    @apply border-b-2 border-line px-2 py-2 text-left text-sm font-semibold text-muted;
+  }
+  .data-table td {
+    @apply border-b border-line px-2 py-3 align-middle;
+  }
+}

@@ -10,7 +10,7 @@ if (!process.env.JWT_SECRET || !process.env.MONGO_URI) {
 const port = process.env.PORT || 5000;
 
 connectDB(process.env.MONGO_URI)
-  .then(() => app.listen(port, () => console.log(`API running on port ${port}`)))
+  .then(() => app.listen(port, () => console.log(`🚀 Server running on port ${port}`)))
   .catch((err) => {
     console.error('Could not start:', err.message);
     process.exit(1);

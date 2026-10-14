@@ -7,8 +7,25 @@ const { notFound, errorHandler } = require('./middleware/errorHandler');
 const app = express();
 app.set('trust proxy', 1);
 
+// Allowed frontend origins: local dev + any URL(s) in APP_URL (comma separated)
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  ...(process.env.APP_URL
+    ? process.env.APP_URL.split(',').map((u) => u.trim().replace(/\/$/, ''))
+    : []),
+];
+
 app.use(helmet());
-app.use(cors({ origin: process.env.APP_URL }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow requests with no origin (Postman, curl) and whitelisted origins
+      if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(null, false);
+    },
+  })
+);
 app.use(express.json());
 if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'));
 

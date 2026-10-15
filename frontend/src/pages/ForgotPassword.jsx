@@ -30,7 +30,7 @@ export default function ForgotPassword() {
         <p className="mb-5 text-muted">
           If this email is registered, a reset link has been sent. The link works once and expires in 1 hour.
         </p>
-        <Link to="/login" className="link">Back to sign in</Link>
+        <Link to="/login" className="link">&larr; Back to list</Link>
       </AuthShell>
     );
   }
@@ -53,7 +53,7 @@ export default function ForgotPassword() {
         </button>
       </form>
 
-      <p className="mt-4"><Link to="/login" className="link">Back to sign in</Link></p>
+      <p className="mt-4"><Link to="/login" className="link">&larr; Back to list</Link></p>
     </AuthShell>
   );
 }

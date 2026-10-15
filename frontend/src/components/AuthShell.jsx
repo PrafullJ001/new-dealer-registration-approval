@@ -22,16 +22,19 @@ export default function AuthShell({ children }) {
         <div className="border border-line bg-white p-5 shadow-sm sm:p-6 md:p-6">{children}</div>
       </main>
 
-      {/* steps right under the card, each one centered in its column */}
-      <section className="mx-auto mb-6 mt-5 grid w-full max-w-3xl gap-4 px-6 sm:grid-cols-3">
+      {/* steps: always 3 in a row. phone = number on top, bigger screens = number beside text */}
+      <section className="mx-auto mb-6 mt-5 grid w-full max-w-3xl grid-cols-3 gap-2 px-3 sm:gap-4 sm:px-6">
         {STEPS.map((s, i) => (
-          <div key={s.title} className="flex items-start justify-center gap-3 text-base">
+          <div
+            key={s.title}
+            className="flex flex-col items-center gap-1 text-center sm:flex-row sm:items-start sm:justify-center sm:gap-3 sm:text-left"
+          >
             <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-navy text-sm text-white">
               {i + 1}
             </span>
             <div>
-              <p className="text-lg font-medium">{s.title}</p>
-              <p className="text-muted">{s.text}</p>
+              <p className="text-base font-medium sm:text-lg">{s.title}</p>
+              <p className="text-sm leading-snug text-muted sm:text-base">{s.text}</p>
             </div>
           </div>
         ))}

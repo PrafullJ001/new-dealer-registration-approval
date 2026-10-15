@@ -4,7 +4,8 @@ const { httpError, asyncHandler } = require('../utils/http');
 const { hashToken } = require('../utils/token');
 const { issueLink } = require('../utils/links');
 
-const BAD_LOGIN = 'Invalid email or password';
+// one message for an unknown email, a wrong password and a wrong role
+const BAD_LOGIN = 'Invalid email, password or role';
 const BAD_LINK = 'This link is invalid or has expired';
 
 const cleanEmail = (v) => String(v || '').trim().toLowerCase();
@@ -27,6 +28,12 @@ exports.login = asyncHandler(async (req, res) => {
     throw httpError(403, 'Your account is not activated yet. Use the invitation link sent to your email.');
   }
   if (!(await user.checkPassword(String(body.password || '')))) throw httpError(401, BAD_LOGIN);
+
+  // a wrong role gets the same answer as a wrong password, so the sign-in screen
+  // cannot be used to confirm a password or to learn which role an account has
+  const chosen = String(body.role || '').toUpperCase();
+  if (chosen && chosen !== user.role) throw httpError(401, BAD_LOGIN);
+
   if (!user.isActive) throw httpError(403, 'This account has been deactivated. Contact an administrator.');
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {

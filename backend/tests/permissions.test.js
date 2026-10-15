@@ -254,6 +254,24 @@ describe('invite, reset and accounts', () => {
     expect(newPassword.status).toBe(200);
   });
 
+  test('signing in with the wrong role gives the same answer as a wrong password', async () => {
+    const user = await makeUser('CREATOR');
+
+    const wrongRole = await request(app)
+      .post('/api/auth/login')
+      .send({ email: user.email, password: 'Passw0rd1', role: 'ADMIN' });
+    const wrongPassword = await request(app)
+      .post('/api/auth/login')
+      .send({ email: user.email, password: 'WrongPass9', role: 'CREATOR' });
+    expect(wrongRole.status).toBe(401);
+    expect(wrongRole.body).toEqual(wrongPassword.body);
+
+    const right = await request(app)
+      .post('/api/auth/login')
+      .send({ email: user.email, password: 'Passw0rd1', role: 'CREATOR' });
+    expect(right.status).toBe(200);
+  });
+
   test('a deactivated user is locked out at once', async () => {
     const temp = await makeUser('CREATOR');
     expect((await request(app).get('/api/dealers').set(as(temp))).status).toBe(200);

@@ -1,18 +1,18 @@
-// the two-column frame shared by the login, forgot-password and set-password pages
+// the two-column frame shared by the forgot-password and set-password pages
 export default function AuthShell({ children }) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      <section className="flex flex-col justify-between gap-8 bg-navy p-8 text-white lg:p-14">
+    <div className="flex min-h-screen flex-col overflow-x-hidden md:grid md:grid-cols-2">
+      <section className="flex flex-col justify-between gap-6 bg-navy px-6 py-8 text-white md:gap-8 md:p-14">
         <div>
           <p className="text-xl font-semibold">Dealer Onboarding Portal</p>
           <p className="text-slate-300">Registration &amp; Approval</p>
         </div>
 
         <div>
-          <h1 className="mb-6 max-w-md text-3xl font-semibold leading-tight">
+          <h1 className="max-w-md text-2xl font-semibold leading-tight md:mb-6 md:text-3xl">
             Register dealers. Review them. Keep the record.
           </h1>
-          <ul className="hidden max-w-md lg:block">
+          <ul className="hidden max-w-md md:block">
             <li className="border-t border-white/20 py-3 text-slate-300">
               <b className="text-white">Creators</b> register new dealers and follow their status.
             </li>
@@ -30,8 +30,8 @@ export default function AuthShell({ children }) {
         </p>
       </section>
 
-      <section className="flex items-center justify-center p-6">
-        <div className="w-full max-w-md border border-line bg-white p-8">{children}</div>
+      <section className="flex flex-1 items-start justify-center p-4 md:items-center md:p-6">
+        <div className="w-full max-w-md border border-line bg-white p-6 md:p-8">{children}</div>
       </section>
     </div>
   );

@@ -40,16 +40,16 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-page">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-page">
       {/* top navy part */}
-      <div className="bg-navy px-6 pb-28 pt-10 text-center text-white">
-        <h1 className="text-2xl font-semibold sm:text-3xl">New Dealer Registration And Approval</h1>
-        <p className="mt-2 text-sm text-slate-300">Register, review and approve dealers in one place</p>
+      <div className="bg-navy px-4 pb-28 pt-10 text-center text-white sm:px-6 md:pb-32 md:pt-14">
+        <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl">New Dealer Registration And Approval</h1>
+        <p className="mt-2 text-sm text-slate-300 md:text-base">Register, review and approve dealers in one place</p>
       </div>
 
       {/* login card floating over the split */}
-      <div className="mx-auto -mt-20 w-full max-w-md px-4">
-        <div className="border border-line bg-white p-6 shadow-sm">
+      <div className="relative mx-auto -mt-20 w-full max-w-md px-4 md:-mt-24 md:max-w-lg">
+        <div className="border border-line bg-white p-5 shadow-sm sm:p-6 md:p-8">
           <h2 className="text-2xl font-semibold">Sign in</h2>
           <p className="mb-5 text-muted">Use the account issued by your administrator.</p>
 
@@ -66,7 +66,7 @@ export default function Login() {
                     role="radio"
                     aria-checked={role === r.value}
                     onClick={() => { setRole(r.value); setError(''); }}
-                    className={`-ml-px flex-1 border px-2 py-2 first:ml-0 ${
+                    className={`-ml-px flex-1 border px-2 py-2 first:ml-0 md:py-2.5 ${
                       role === r.value
                         ? 'relative border-navy bg-navy font-medium text-white'
                         : 'border-line bg-white hover:border-accent'
@@ -91,12 +91,12 @@ export default function Login() {
                 <Link to="/forgot-password" className="link mb-1 text-sm">Forgot password?</Link>
               </div>
               <div className="flex gap-2">
-                <input id="password" className="input" autoComplete="current-password"
+                <input id="password" className="input min-w-0" autoComplete="current-password"
                   type={showPassword ? 'text' : 'password'} value={password}
                   onChange={(e) => setPassword(e.target.value)} required />
                 <button
                   type="button"
-                  className="btn"
+                  className="btn flex-none"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   title={showPassword ? 'Hide password' : 'Show password'}
@@ -124,7 +124,7 @@ export default function Login() {
               </div>
             </div>
 
-            <button className="btn btn-primary w-full py-2.5" disabled={busy}>
+            <button className="btn btn-primary w-full py-2.5 md:py-3" disabled={busy}>
               {busy ? 'Signing in...' : `Sign in as ${selected.label}`}
             </button>
           </form>
@@ -132,9 +132,9 @@ export default function Login() {
       </div>
 
       {/* three steps under the card */}
-      <div className="mx-auto grid w-full max-w-3xl gap-6 px-6 py-10 sm:grid-cols-3">
+      <div className="mx-auto grid w-full max-w-3xl gap-6 px-6 py-10 sm:grid-cols-3 md:text-base">
         {STEPS.map((s, i) => (
-          <div key={s.title} className="flex items-start gap-3 text-sm">
+          <div key={s.title} className="flex items-start gap-3 text-sm md:text-base">
             <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-navy text-xs text-white">
               {i + 1}
             </span>

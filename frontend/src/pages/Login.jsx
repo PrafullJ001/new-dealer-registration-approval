@@ -40,15 +40,15 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-page">
-      {/* top navy part */}
-      <div className="bg-navy px-4 pb-28 pt-10 text-center text-white sm:px-6 md:pb-32 md:pt-14">
+    <div className="auth-scale flex min-h-screen flex-col overflow-x-hidden bg-page">
+      {/* top navy part: grows with the screen height, so tall screens are not left empty */}
+      <header className="flex min-h-[220px] flex-1 flex-col items-center justify-center bg-navy px-4 pb-28 pt-10 text-center text-white sm:px-6 md:pb-32 md:pt-14">
         <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl">New Dealer Registration And Approval</h1>
         <p className="mt-2 text-sm text-slate-300 md:text-base">Register, review and approve dealers in one place</p>
-      </div>
+      </header>
 
       {/* login card floating over the split */}
-      <div className="relative mx-auto -mt-20 w-full max-w-md px-4 md:-mt-24 md:max-w-lg">
+      <main className="relative mx-auto mb-10 -mt-20 w-full max-w-md px-4 md:-mt-24 md:max-w-lg">
         <div className="border border-line bg-white p-5 shadow-sm sm:p-6 md:p-8">
           <h2 className="text-2xl font-semibold">Sign in</h2>
           <p className="mb-5 text-muted">Use the account issued by your administrator.</p>
@@ -129,22 +129,24 @@ export default function Login() {
             </button>
           </form>
         </div>
-      </div>
+      </main>
 
-      {/* three steps under the card */}
-      <div className="mx-auto grid w-full max-w-3xl gap-6 px-6 py-10 sm:grid-cols-3 md:text-base">
-        {STEPS.map((s, i) => (
-          <div key={s.title} className="flex items-start gap-3 text-sm md:text-base">
-            <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-navy text-xs text-white">
-              {i + 1}
-            </span>
-            <div>
-              <p className="font-medium">{s.title}</p>
-              <p className="text-muted">{s.text}</p>
+      {/* three steps under the card, as a strip along the bottom */}
+      <footer className="border-t border-line bg-white">
+        <div className="mx-auto grid w-full max-w-3xl gap-6 px-6 py-8 sm:grid-cols-3 md:text-base">
+          {STEPS.map((s, i) => (
+            <div key={s.title} className="flex items-start gap-3 text-sm md:text-base">
+              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-navy text-xs text-white">
+                {i + 1}
+              </span>
+              <div>
+                <p className="font-medium">{s.title}</p>
+                <p className="text-muted">{s.text}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </footer>
     </div>
   );
 }

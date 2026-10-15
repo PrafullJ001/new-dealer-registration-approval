@@ -67,3 +67,11 @@ body {
     @apply border-b border-line px-2 py-3 align-middle;
   }
 }
+/* A phone opened with "Desktop site" reports a ~980px wide screen and shrinks the page,
+   so everything looks tiny. Scale up only the sign-in pages at that width.
+   Delete this block if you do not want it. */
+@media (min-width: 768px) and (max-width: 1099px) {
+  html:has(.auth-scale) {
+    font-size: 22px;
+  }
+}

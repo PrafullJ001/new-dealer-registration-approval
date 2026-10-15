@@ -25,12 +25,12 @@ export default function AuthShell({ children }) {
       {/* steps right under the card (no mt-auto, so no scrolling to find them) */}
       <section className="mx-auto mb-6 mt-5 grid w-full max-w-3xl gap-3 px-6 sm:grid-cols-3">
         {STEPS.map((s, i) => (
-          <div key={s.title} className="flex items-start gap-3 text-sm">
-            <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-navy text-xs text-white">
+          <div key={s.title} className="flex items-start gap-3 text-base">
+            <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-navy text-sm text-white">
               {i + 1}
             </span>
             <div>
-              <p className="font-medium">{s.title}</p>
+              <p className="text-lg font-medium">{s.title}</p>
               <p className="text-muted">{s.text}</p>
             </div>
           </div>

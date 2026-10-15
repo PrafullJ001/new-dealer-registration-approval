@@ -52,7 +52,7 @@ export default function SetPassword() {
         <h2 className="mb-2 text-2xl font-semibold">Link not valid</h2>
         <p className="mb-5 text-muted">{problem}. Ask for a new link.</p>
         <Link to="/forgot-password" className="btn btn-primary mr-2">Request a reset link</Link>
-        <Link to="/login" className="btn">Back to sign in</Link>
+        <Link to="/login" className="btn">&larr; Back to list</Link>
       </AuthShell>
     );
   }

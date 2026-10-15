@@ -17,7 +17,7 @@ export default function Users() {
   const { user: me } = useAuth();
   const [users, setUsers] = useState([]);
   const [version, setVersion] = useState(0);
-  const [form, setForm] = useState({ name: '', email: '', role: 'CREATOR' });
+  const [form, setForm] = useState({ name: '', email: '', role: '' });
   const [msg, setMsg] = useState(null);
   const [busy, setBusy] = useState(false);
 
@@ -33,7 +33,7 @@ export default function Users() {
     setBusy(true);
     try {
       const { data } = await api.post('/users', form);
-      setForm({ name: '', email: '', role: 'CREATOR' });
+      setForm({ name: '', email: '', role: '' });
       setMsg(
         data.emailed
           ? { text: `Invitation sent to ${data.user.email}.` }
@@ -87,7 +87,9 @@ export default function Users() {
           </div>
           <div>
             <label className="label">Role</label>
-            <select className="input" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
+            <select className="input" value={form.role} required
+              onChange={(e) => setForm({ ...form, role: e.target.value })}>
+              <option value="" disabled>Select role</option>
               <option value="CREATOR">Creator</option>
               <option value="APPROVER">Approver</option>
               <option value="ADMIN">Admin</option>

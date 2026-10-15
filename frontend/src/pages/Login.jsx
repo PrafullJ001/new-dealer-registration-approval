@@ -41,8 +41,8 @@ export default function Login() {
 
   return (
     <div className="auth-scale flex min-h-screen flex-col overflow-x-hidden bg-page">
-      {/* top navy part: grows with the screen height, so tall screens are not left empty */}
-      <header className="flex min-h-[220px] flex-1 flex-col items-center justify-center bg-navy px-4 pb-28 pt-10 text-center text-white sm:px-6 md:pb-32 md:pt-14">
+      {/* top navy part: a slim band, it does not grow with the screen height */}
+      <header className="bg-navy px-4 pb-28 pt-10 text-center text-white sm:px-6 md:pb-32 md:pt-14">
         <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl">New Dealer Registration And Approval</h1>
         <p className="mt-2 text-sm text-slate-300 md:text-base">Register, review and approve dealers in one place</p>
       </header>
@@ -132,7 +132,7 @@ export default function Login() {
       </main>
 
       {/* three steps under the card, as a strip along the bottom */}
-      <footer className="border-t border-line bg-white">
+      <footer className="mt-auto border-t border-line bg-white">
         <div className="mx-auto grid w-full max-w-3xl gap-6 px-6 py-8 sm:grid-cols-3 md:text-base">
           {STEPS.map((s, i) => (
             <div key={s.title} className="flex items-start gap-3 text-sm md:text-base">

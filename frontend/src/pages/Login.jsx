@@ -43,7 +43,7 @@ export default function Login() {
     <div className="auth-scale flex min-h-screen flex-col overflow-x-hidden bg-page">
       {/* slim navy band */}
       <header className="bg-navy px-4 pb-20 pt-6 text-center text-white sm:px-6 md:pb-24 md:pt-8">
-        <h1 className="text-xl font-semibold sm:text-2xl md:text-3xl">New Dealer Registration And Approval</h1>
+        <h1 className="text-xl font-semibold sm:text-2xl md:text-3xl">New Dealer Registration And Approval Portal</h1>
         <p className="mt-1 text-sm text-slate-300">Register, review and approve dealers in one place</p>
       </header>
 

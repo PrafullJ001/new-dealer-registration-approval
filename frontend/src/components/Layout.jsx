@@ -18,6 +18,9 @@ export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
+  // page menu button on a simple phone view (open / close) - display only
+  const [navOpen, setNavOpen] = useState(false);
+
   // close the menu when clicking outside or pressing Escape
   useEffect(() => {
     if (!menuOpen) return;
@@ -63,76 +66,116 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-10 flex h-[57px] items-center justify-between gap-3 bg-navy px-6 text-white">
+      <header className="sticky top-0 z-10 flex h-[57px] items-center justify-between gap-3 bg-navy px-4 text-white sm:px-6">
         <div className="flex items-center gap-3">
-          <span className="text-lg font-semibold">New Dealer Registration And Approval Portal</span>
+          <span className="text-[15px] font-semibold leading-tight sm:text-lg sm:leading-normal">
+            New Dealer Registration And Approval Portal
+          </span>
         </div>
 
-        {/* profile: name and role always visible, click to open the menu */}
-        <div className="relative" ref={menuRef}>
+        <div className="flex flex-none items-center gap-2">
+          {/* profile: click to open the menu (name and role hidden on a simple phone view, shown inside the menu) */}
+          <div className="relative" ref={menuRef}>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-haspopup="menu"
+              aria-expanded={menuOpen}
+              aria-label="Open profile menu"
+              className="flex cursor-pointer items-center gap-2.5"
+            >
+              <span className="hidden text-right leading-tight sm:block">
+                <span className="block text-sm font-medium">{user.name}</span>
+                <span className="block text-xs text-slate-300">{ROLE_NAME[user.role]}</span>
+              </span>
+              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-white text-xs font-medium text-navy">
+                {initials}
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                strokeLinejoin="round" aria-hidden="true" className="hidden sm:block">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+
+            {menuOpen && (
+              <div
+                role="menu"
+                className="absolute right-0 top-full mt-2 w-56 border border-line bg-white p-1.5 text-ink shadow-sm"
+              >
+                <div className="border-b border-line px-3 py-2.5">
+                  <p className="text-sm font-medium">{user.name}</p>
+                  <span className="mt-1 inline-block bg-accent-soft px-2 py-0.5 text-xs text-accent">
+                    {ROLE_NAME[user.role]}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => { setMenuOpen(false); signOut(); }}
+                  className="mt-1.5 flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm text-bad hover:bg-page"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                    strokeLinejoin="round" aria-hidden="true">
+                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                    <path d="M9 12h12l-3 -3" />
+                    <path d="M18 15l3 -3" />
+                  </svg>
+                  Sign out
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Menu button: only on a simple phone view (hidden from 640px up) */}
           <button
             type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-haspopup="menu"
-            aria-expanded={menuOpen}
-            aria-label="Open profile menu"
-            className="flex cursor-pointer items-center gap-2.5"
+            onClick={() => setNavOpen((v) => !v)}
+            aria-expanded={navOpen}
+            aria-controls="main-nav"
+            aria-label={navOpen ? 'Close menu' : 'Open menu'}
+            className="flex h-9 w-9 flex-none cursor-pointer items-center justify-center border border-white/40 sm:hidden"
           >
-            <span className="text-right leading-tight">
-              <span className="block text-sm font-medium">{user.name}</span>
-              <span className="block text-xs text-slate-300">{ROLE_NAME[user.role]}</span>
-            </span>
-            <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-white text-xs font-medium text-navy">
-              {initials}
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-              strokeLinejoin="round" aria-hidden="true">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            {navOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            )}
           </button>
-
-          {menuOpen && (
-            <div
-              role="menu"
-              className="absolute right-0 top-full mt-2 w-56 border border-line bg-white p-1.5 text-ink shadow-sm"
-            >
-              <div className="border-b border-line px-3 py-2.5">
-                <p className="text-sm font-medium">{user.name}</p>
-                <span className="mt-1 inline-block bg-accent-soft px-2 py-0.5 text-xs text-accent">
-                  {ROLE_NAME[user.role]}
-                </span>
-              </div>
-              <button
-                type="button"
-                role="menuitem"
-                onClick={() => { setMenuOpen(false); signOut(); }}
-                className="mt-1.5 flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm text-bad hover:bg-page"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                  strokeLinejoin="round" aria-hidden="true">
-                  <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                  <path d="M9 12h12l-3 -3" />
-                  <path d="M18 15l3 -3" />
-                </svg>
-                Sign out
-              </button>
-            </div>
-          )}
         </div>
       </header>
 
       <div className="md:grid md:grid-cols-[260px_1fr]">
         <nav className="border-b border-line bg-white md:sticky md:top-[57px] md:h-[calc(100vh-57px)] md:overflow-auto md:border-b-0 md:border-r">
-          <ul className="flex flex-wrap md:block">
+          {/* who is signed in: only inside the opened menu on a simple phone view */}
+          {navOpen && (
+            <div className="border-b border-line px-4 py-2 text-xs text-muted sm:hidden">
+              Signed in as <span className="font-medium text-ink">{user.name}</span> ({ROLE_NAME[user.role]})
+            </div>
+          )}
+
+          <ul
+            id="main-nav"
+            className={`${navOpen ? 'block' : 'hidden'} sm:flex sm:flex-wrap md:block`}
+          >
             {links.map((l) => (
               <li key={l.to}>
                 <NavLink
                   to={l.to}
                   end={l.end}
+                  onClick={() => setNavOpen(false)}
                   className={({ isActive }) =>
-                    `block border-b-4 px-4 py-3 md:border-b-0 md:border-l-4 ${
+                    `block border-b-0 border-l-4 px-4 py-3 text-sm sm:border-b-4 sm:border-l-0 sm:text-base md:border-b-0 md:border-l-4 ${
                       isActive
                         ? 'border-accent bg-accent-soft font-medium text-accent'
                         : 'border-transparent hover:bg-page'

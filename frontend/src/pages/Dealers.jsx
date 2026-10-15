@@ -66,7 +66,7 @@ export default function Dealers() {
           <table className="data-table">
             <thead>
               <tr>
-                <th>Dealer</th><th>Location</th><th>GSTIN</th><th>Registered</th>
+                <th>Dealer code</th><th>Dealer</th><th>Location</th><th>GSTIN</th><th>Registered</th>
                 {!isCreator && <th>Created by</th>}
                 <th>Status</th><th></th>
               </tr>
@@ -74,9 +74,12 @@ export default function Dealers() {
             <tbody>
               {rows?.map((d) => (
                 <tr key={d._id}>
+                  <td className="whitespace-nowrap">
+                    <Link to={`/dealers/${d._id}`} className="link font-mono text-sm font-medium">{d.code}</Link>
+                  </td>
                   <td>
-                    <Link to={`/dealers/${d._id}`} className="link font-medium">{d.name}</Link>
-                    <p className="text-sm text-muted"><span className="font-mono">{d.code}</span> · {d.type}</p>
+                    <span className="font-medium">{d.name}</span>
+                    <p className="text-sm text-muted">{d.type}</p>
                   </td>
                   <td>{d.state}<p className="text-sm text-muted">{d.city}</p></td>
                   <td className="font-mono text-sm">{d.gstin}</td>

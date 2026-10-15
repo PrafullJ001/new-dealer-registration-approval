@@ -41,15 +41,15 @@ export default function Login() {
 
   return (
     <div className="auth-scale flex min-h-screen flex-col overflow-x-hidden bg-page">
-      {/* top navy part: a slim band, it does not grow with the screen height */}
-      <header className="bg-navy px-4 pb-28 pt-10 text-center text-white sm:px-6 md:pb-32 md:pt-14">
-        <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl">New Dealer Registration And Approval</h1>
-        <p className="mt-2 text-sm text-slate-300 md:text-base">Register, review and approve dealers in one place</p>
+      {/* slim navy band */}
+      <header className="bg-navy px-4 pb-20 pt-6 text-center text-white sm:px-6 md:pb-24 md:pt-8">
+        <h1 className="text-xl font-semibold sm:text-2xl md:text-3xl">New Dealer Registration And Approval</h1>
+        <p className="mt-1 text-sm text-slate-300">Register, review and approve dealers in one place</p>
       </header>
 
-      {/* login card floating over the split */}
-      <main className="relative mx-auto mb-10 -mt-20 w-full max-w-md px-4 md:-mt-24 md:max-w-lg">
-        <div className="border border-line bg-white p-5 shadow-sm sm:p-6 md:p-8">
+      {/* login card floating over the band */}
+      <main className="relative mx-auto -mt-14 w-full max-w-md px-4 md:-mt-16 md:max-w-lg">
+        <div className="border border-line bg-white p-5 shadow-sm sm:p-6 md:p-6">
           <h2 className="text-2xl font-semibold">Sign in</h2>
           <p className="mb-5 text-muted">Use the account issued by your administrator.</p>
 
@@ -66,7 +66,7 @@ export default function Login() {
                     role="radio"
                     aria-checked={role === r.value}
                     onClick={() => { setRole(r.value); setError(''); }}
-                    className={`-ml-px flex-1 border px-2 py-2 first:ml-0 md:py-2.5 ${
+                    className={`-ml-px flex-1 border px-2 py-2 first:ml-0 ${
                       role === r.value
                         ? 'relative border-navy bg-navy font-medium text-white'
                         : 'border-line bg-white hover:border-accent'
@@ -124,29 +124,27 @@ export default function Login() {
               </div>
             </div>
 
-            <button className="btn btn-primary w-full py-2.5 md:py-3" disabled={busy}>
+            <button className="btn btn-primary w-full py-2.5" disabled={busy}>
               {busy ? 'Signing in...' : `Sign in as ${selected.label}`}
             </button>
           </form>
         </div>
       </main>
 
-      {/* three steps under the card, as a strip along the bottom */}
-      <footer className="mt-auto border-t border-line bg-white">
-        <div className="mx-auto grid w-full max-w-3xl gap-6 px-6 py-8 sm:grid-cols-3 md:text-base">
-          {STEPS.map((s, i) => (
-            <div key={s.title} className="flex items-start gap-3 text-sm md:text-base">
-              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-navy text-xs text-white">
-                {i + 1}
-              </span>
-              <div>
-                <p className="font-medium">{s.title}</p>
-                <p className="text-muted">{s.text}</p>
-              </div>
+      {/* steps right under the card (no mt-auto, so no scrolling to find them) */}
+      <section className="mx-auto mb-6 mt-5 grid w-full max-w-3xl gap-3 px-6 sm:grid-cols-3">
+        {STEPS.map((s, i) => (
+          <div key={s.title} className="flex items-start gap-3 text-sm">
+            <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-navy text-xs text-white">
+              {i + 1}
+            </span>
+            <div>
+              <p className="font-medium">{s.title}</p>
+              <p className="text-muted">{s.text}</p>
             </div>
-          ))}
-        </div>
-      </footer>
+          </div>
+        ))}
+      </section>
     </div>
   );
 }

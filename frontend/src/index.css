@@ -75,4 +75,15 @@ body {
   html:has(.auth-scale) {
     font-size: 18px;
   }
+  /* bigger input text so the browser does not zoom the page when a field is tapped */
+  html:has(.auth-scale) .input {
+    font-size: 24px;
+  }
+}
+
+/* real phones: inputs under 16px make iOS zoom on focus, keep them at 16px or more */
+@media (max-width: 767px) {
+  .auth-scale .input {
+    font-size: 16px;
+  }
 }
